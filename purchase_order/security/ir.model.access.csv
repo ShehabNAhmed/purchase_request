@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.purchase.request,access_purchase_request,purchase_order.model_purchase_request,base.group_user,1,1,1,1
+access.order.lines,access_order_lines,purchase_order.model_order_lines,base.group_user,1,1,1,1
+access.cancel.purchase.wizard,access_cancel_purchase_wizard,purchase_order.model_cancel_purchase_wizard,base.group_user,1,1,1,1
+
+
+
+
+

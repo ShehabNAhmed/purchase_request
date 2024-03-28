@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <menuitem
+            id="purchase.menu_purchase_root"
+            name="Orders menu"
+            sequence="5"/>
+     <menuitem
+            id="menu_Purchase_root"
+            name="Purchase"
+            parent="purchase.menu_purchase_root"
+            sequence="0"/>
+      <menuitem id="menu_configuration"
+              name="configuration"
+              parent="purchase.menu_purchase_root"
+              sequence="20"/>
+    <menuitem
+            id="menu_cancellation"
+            name="cancellation"
+            action="action_cancel_purchase"
+            parent="menu_configuration"
+            sequence="110"/>
+
+
+</odoo>

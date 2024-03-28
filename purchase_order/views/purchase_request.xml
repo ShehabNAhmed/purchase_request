@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="view_purchase_request_form" model="ir.ui.view">
+        <field name="name">view_purchase_request_form</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_draft" string="Reset to draft" type="object" states="cancel"/>
+                    <button name="action_in_to_be_approved" string="Submit for Approval" type="object" data-hotkey="l"
+                            states="draft"/>
+                    <button name="action_approve" string="Approve" type="object"
+                            data-hotkey="k"
+                            states="to be approved"/>
+                    <button name="action_cancel" string=" cancel" type="object" states="draft"/>
+                    <button name="%(purchase_order.action_cancel_purchase)d" string=" reject" type="action" states="to be approved"/>
+                    <field name="state" widget="statusbar" nolabel="1"
+                           statusbar_visible="draft,to be approved,approve,reject"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="Request_name" attrs="{'readonly': [('state', 'in', ('approve', 'reject','cancel'))]}"/>
+                            <field name="Requested_by" attrs="{'readonly': [('state', 'in', ('approve', 'reject','cancel'))]}"/>
+                            <field name="Start_Date" attrs="{'readonly': [('state', 'in', ('approve', 'reject','cancel'))]}"/>
+                            <field name="End_date" attrs="{'readonly': [('state', 'in', ('approve', 'reject','cancel'))]}"/>
+                            <field name="Total_Price" attrs="{'readonly': [('state', 'in', ('approve', 'reject','cancel'))]}"/>
+                        </group>
+                        <group>
+                            <field name="Rejection_Reason"   />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+
+                        <page string="order line" name="Orderline">
+
+                            <field name="orderlines_ids">
+                                <tree>
+                                    <field name="product_id"/>
+                                    <field name="Description"/>
+                                    <field name="Quantity"/>
+                                    <field name="Cost_Price"/>
+                                    <field name="Total"/>
+                                    <field name="purchase_id"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="product_id"/>
+                                        <field name="Description"/>
+                                        <field name="Quantity"/>
+                                        <field name="Cost_Price"/>
+                                        <field name="Total"/>
+                                        <field name="purchase_id"/>
+                                    </group>
+                                </form>
+                            </field>
+
+
+                        </page>
+                    </notebook>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_purchase_request_tree" model="ir.ui.view">
+        <field name="name">view_purchase_request_tree</field>
+        <field name="model">purchase.request</field>
+        <field name="arch" type="xml">
+            <tree string="purchase">
+                <field name="Request_name"/>
+                <field name="Requested_by"/>
+                <field name="Start_Date"/>
+                <field name="End_date"/>
+                <field name="Rejection_Reason"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_Purchase_Requests">
+        <field name="name">action_Purchase_Requests</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.request</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create the first purchase request</p>
+        </field>
+
+    </record>
+    <menuitem
+            id="menu_Purchase_Requests_root"
+            name="Purchase Requests"
+            parent="menu_Purchase_root"
+            action="action_Purchase_Requests"
+            sequence="0"/>
+</odoo>
